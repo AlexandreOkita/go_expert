@@ -6,10 +6,10 @@ migrate:
     docker-compose run --rm migration
 
 build_server:
-    CGO_ENABLED=1 go build -o server ./server/main.go
+    go build -o server ./server/main.go
 
 build_client:
-    CGO_ENABLED=1 go build -o client ./client/main.go
+    go build -o client ./client/main.go
 
 run_server:
     ./server
