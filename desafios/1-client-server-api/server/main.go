@@ -11,7 +11,7 @@ import (
 )
 
 const REQUEST_TIMEOUT = time.Millisecond * 200
-const DATABASE_TIMEOUT = time.Millisecond * 20000
+const DATABASE_TIMEOUT = time.Millisecond * 10
 const DATABASE_URL = "../data/goexpert_sqlite.db"
 const SERVER_PORT = ":8080"
 
