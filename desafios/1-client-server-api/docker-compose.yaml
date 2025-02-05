@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  sqlite:
+    image: nouchka/sqlite3
+    container_name: goexpert_sqlite
+    volumes:
+      - ./data:/data
+    command: ["sqlite3", "/data/goexpert_sqlite.db"]
+  migration:
+    image: flyway/flyway:9.0
+    command: -community -url=jdbc:sqlite:/data/goexpert_sqlite.db -locations=filesystem:/flyway/sql migrate
+    volumes:
+      - ./migration/flyway/sql:/flyway/sql
+      - ./data:/data
+    depends_on:
+      - sqlite
+volumes:
+  postgres-goexpert:
