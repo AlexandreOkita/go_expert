@@ -45,6 +45,7 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Product %s possui preço de %.2f\n", p.Name, p.Price)
+	deleteProduct(db, product.ID)
 	products, err := selectAllProducts(db)
 	if err != nil {
 		panic(err)
@@ -110,4 +111,17 @@ func selectAllProducts(db *sql.DB) ([]Product, error) {
 		products = append(products, p)
 	}
 	return products, nil
+}
+
+func deleteProduct(db *sql.DB, id string) error {
+	stmt, err := db.Prepare("delete from products where id = $1")
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+	_, err = stmt.Exec(id)
+	if err != nil {
+		return err
+	}
+	return nil
 }
